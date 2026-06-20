@@ -46,7 +46,7 @@ export default function ProductCard({ product, stepId }: Props) {
 
       {/* Image */}
       <div className="w-full xl:w-1/3 aspect-4/3 overflow-hidden flex items-center justify-center">
-        <img src={displayImage} alt={product.name} className="w-full" />
+        <img src={displayImage} alt={product.name} className="w-full h-full object-contain" />
       </div>
 
       {/* Body */}
