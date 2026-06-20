@@ -21,7 +21,11 @@ interface BundleState {
     variantId: string,
   ) => void;
 
-  // Derived (computed in selectors below)
+  // Hydration
+  _hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  _stepsData?: any;
 }
 
 export const useBundleStore = create<BundleState>()(
@@ -29,6 +33,7 @@ export const useBundleStore = create<BundleState>()(
     (set) => ({
       steps: initialSteps,
       activeStep: 0,
+      _hasHydrated: false,
 
       setActiveStep: (index) =>
         set((state) => ({
@@ -69,9 +74,62 @@ export const useBundleStore = create<BundleState>()(
             };
           }),
         })),
+
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
     }),
     {
       name: "bundle-builder-config",
+      partialize: (state) => ({
+        // Only persist these fields, not the JSX elements in steps
+        activeStep: state.activeStep,
+        _hasHydrated: state._hasHydrated,
+        // Store only the quantity and variant data
+        _stepsData: state.steps.map((step) => ({
+          id: step.id,
+          products: step.products.map((p) => ({
+            id: p.id,
+            qty: p.qty,
+            activeVariant: p.activeVariant,
+            variants:
+              p.variants?.map((v) => ({ id: v.id, qty: v.qty })) || null,
+          })),
+        })),
+      }),
+      onRehydrateStorage: () => (state) => {
+        if (state && state._stepsData) {
+          // Merge persisted data back into initialSteps
+          const stepsData = state._stepsData;
+          state.steps = initialSteps.map((step) => {
+            const stepData = stepsData.find(
+              (s: { id: string }) => s.id === step.id,
+            );
+            if (!stepData) return step;
+            return {
+              ...step,
+              products: step.products.map((p) => {
+                const productData = stepData.products.find(
+                  (pd: { id: string }) => pd.id === p.id,
+                );
+                if (!productData) return p;
+                return {
+                  ...p,
+                  qty: productData.qty,
+                  activeVariant: productData.activeVariant,
+                  variants:
+                    p.variants?.map((v) => {
+                      const variantData = productData.variants?.find(
+                        (vd: { id: string }) => vd.id === v.id,
+                      );
+                      return variantData ? { ...v, qty: variantData.qty } : v;
+                    }) || null,
+                };
+              }),
+            };
+          });
+          delete state._stepsData;
+        }
+        if (state) state.setHasHydrated(true);
+      },
     },
   ),
 );
@@ -95,12 +153,15 @@ export function useReviewItems(): ReviewItem[] {
               productId: p.id,
               variantId: v.id,
               name: `${p.name} – ${v.label}`,
+              assets: p.assets,
               image: v.image || p.image,
               price: p.price,
               comparePrice: p.comparePrice,
               priceSuffix: p.priceSuffix,
               qty: v.qty,
               category,
+              maxQty: p.maxQty,
+              isFree: p.isFree,
             });
           }
         });
@@ -113,6 +174,7 @@ export function useReviewItems(): ReviewItem[] {
             productId: p.id,
             variantId: null,
             name: p.name,
+            assets: p.assets,
             image: p.image,
             price: p.price,
             comparePrice: p.comparePrice,
@@ -154,4 +216,10 @@ export function useSelectedCounts(): number[] {
     });
     return count;
   });
+}
+
+// Hydration check hook
+export function useHasHydrated() {
+  const hasHydrated = useBundleStore((s) => s._hasHydrated);
+  return hasHydrated;
 }

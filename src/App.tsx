@@ -1,12 +1,25 @@
-import { useBundleStore, useSelectedCounts } from "./store/bundleStore";
+import {
+  useBundleStore,
+  useSelectedCounts,
+  useHasHydrated,
+} from "./store/bundleStore";
 import AccordionStep from "./components/AccordionStep";
 import ReviewPanel from "./components/ReviewPanel";
 
 export default function App() {
+  const hasHydrated = useHasHydrated();
   const steps = useBundleStore((s) => s.steps);
   const activeStep = useBundleStore((s) => s.activeStep);
   const setActiveStep = useBundleStore((s) => s.setActiveStep);
   const selectedCounts = useSelectedCounts();
+
+  if (!hasHydrated) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

@@ -9,10 +9,10 @@ export interface Variant {
 }
 
 export interface ProductVariant {
-    src: string;
-    alt: string;
-    types: Record<string, string>;
-  }
+  src: string;
+  alt: string;
+  types: Record<string, string>;
+}
 
 export interface Product {
   id: string;
@@ -49,7 +49,8 @@ export interface ReviewItem {
   productId: string;
   variantId: string | null;
   name: string;
-  image: string;
+  assets?: ProductVariant;
+  image?: string;
   price: number;
   comparePrice: number | null;
   priceSuffix?: string;

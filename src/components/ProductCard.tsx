@@ -23,7 +23,8 @@ export default function ProductCard({ product, stepId }: Props) {
     setQty(stepId, product.id, product.activeVariant, qty);
   };
 
-  const displayImage = activeVariant?.image || firstVariant?.image || product.image;
+  const displayImage =
+    activeVariant?.image || firstVariant?.image || product.image;
 
   return (
     <div
@@ -45,11 +46,7 @@ export default function ProductCard({ product, stepId }: Props) {
 
       {/* Image */}
       <div className="w-full xl:w-1/3 aspect-4/3 overflow-hidden flex items-center justify-center">
-        <img
-          src={displayImage}
-          alt={product.name}
-          className="object-cover w-full h-full"
-        />
+        <img src={displayImage} alt={product.name} className="w-full" />
       </div>
 
       {/* Body */}
@@ -59,9 +56,7 @@ export default function ProductCard({ product, stepId }: Props) {
         </h3>
         <p className="text-xs text-gray-500 leading-relaxed flex-1">
           {product.description}{" "}
-          <span
-            className="text-xs text-indigo-600 hover:underline font-medium cursor-pointer"
-          >
+          <span className="text-xs text-indigo-600 hover:underline font-medium cursor-pointer">
             Learn More
           </span>
         </p>
