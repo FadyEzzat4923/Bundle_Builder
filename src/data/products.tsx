@@ -1,69 +1,130 @@
+import { BiCameraHome } from "react-icons/bi";
 import type { Step } from "../types";
+import { MdOutlineSecurity, MdSensors } from "react-icons/md";
+import { BsGrid3X3Gap } from "react-icons/bs";
+import c1 from "../assets/camera1.png";
+import c1t1 from "../assets/camera1-white.png";
+import c1t2 from "../assets/camera1-gray.png";
+import c1t3 from "../assets/camera1-black.png";
+import c2 from "../assets/camera2.png";
+import c2t1 from "../assets/camera2-white.png";
+import c2t3 from "../assets/camera2-black.png";
+import c3 from "../assets/camera3.png";
+import c3t1 from "../assets/camera3-white.png";
+import c3t3 from "../assets/camera3-black.png";
+import c4 from "../assets/camera4.png";
+import c5 from "../assets/camera5.png";
+import c5t1 from "../assets/camera5-white.png";
+import c5t3 from "../assets/camera5-black.png";
+import pro from "../assets/pro-plan.png";
+import basic from "../assets/basic-plan.png";
+
+const images = {
+  cameras: {
+    c1: {
+      src: c1,
+      alt: "Wyze Cam v4",
+      types: {
+        white: c1t1,
+        grey: c1t2,
+        black: c1t3,
+      },
+    },
+    c2: {
+      src: c2,
+      alt: "Wyze Cam Pan v3",
+      types: {
+        white: c2t1,
+        black: c2t3,
+      },
+    },
+    c3: {
+      src: c3,
+      alt: "Wyze Cam Floodlight v2",
+      types: {
+        white: c3t1,
+        black: c3t3,
+      },
+    },
+    c4: {
+      src: c4,
+      alt: "Wyze Duo Cam Doorbell",
+      types: {
+        white: c4,
+      },
+    },
+    c5: {
+      src: c5,
+      alt: "Wyze Battery Cam Pro",
+      types: {
+        white: c5t1,
+        black: c5t3,
+      },
+    },
+  },
+};
 
 const steps: Step[] = [
   {
     id: "cameras",
     stepNumber: 1,
     title: "Choose your cameras",
-    icon: "M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.9L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z",
+    icon: <BiCameraHome className="text-gray-600 text-2xl" />,
     nextLabel: "Next: Choose your plan",
     products: [
       {
         id: "cam-v4",
-        name: "Wyze Cam v4",
+        name: "Standard Camera",
         description: "The clearest Wyze Cam ever made.",
-        image:
-          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=220&h=180&fit=crop",
+        assets: images.cameras.c1,
         badge: "Save 22%",
         comparePrice: 35.98,
         price: 27.98,
         learnMore: "#",
         variants: [
-          { id: "cam-v4-white", label: "White", color: "#FFFFFF", qty: 1 },
-          { id: "cam-v4-grey", label: "Grey", color: "#9CA3AF", qty: 0 },
-          { id: "cam-v4-black", label: "Black", color: "#1F2937", qty: 0 },
+          { id: "cam-v4-white", label: "White", image: c1t1, qty: 1 },
+          { id: "cam-v4-grey", label: "Grey", image: c1t2, qty: 0 },
+          { id: "cam-v4-black", label: "Black", image: c1t3, qty: 0 },
         ],
         activeVariant: "cam-v4-white",
       },
       {
         id: "cam-pan-v3",
-        name: "Wyze Cam Pan v3",
+        name: "Pan & Tilt Camera",
         description: "360° pan and 180° tilt security camera.",
-        image:
-          "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=220&h=180&fit=crop",
+        assets: images.cameras.c2,
         badge: "Save 12%",
         comparePrice: 39.98,
         price: 34.98,
         learnMore: "#",
         variants: [
-          { id: "cam-pan-white", label: "White", color: "#FFFFFF", qty: 2 },
-          { id: "cam-pan-black", label: "Black", color: "#1F2937", qty: 0 },
+          { id: "cam-pan-white", label: "White", image: c2t1, qty: 2 },
+          { id: "cam-pan-black", label: "Black", image: c2t3, qty: 0 },
         ],
         activeVariant: "cam-pan-white",
       },
       {
         id: "cam-floodlight",
-        name: "Wyze Cam Floodlight v2",
+        name: "Floodlight Camera",
         description:
           "2K floodlight camera with a 160° wide-angle view for your garage.",
-        image:
-          "https://images.unsplash.com/photo-1504509546545-e000b4a62425?w=220&h=180&fit=crop",
+        assets: images.cameras.c3,
         badge: "Save 22%",
         comparePrice: 89.98,
         price: 69.98,
         learnMore: "#",
         variants: [
-          { id: "cam-flood-white", label: "White", color: "#FFFFFF", qty: 0 },
-          { id: "cam-flood-black", label: "Black", color: "#1F2937", qty: 0 },
+          { id: "cam-flood-white", label: "White", image: c3t1, qty: 0 },
+          { id: "cam-flood-black", label: "Black", image: c3t3, qty: 0 },
         ],
         activeVariant: "cam-flood-white",
       },
       {
         id: "cam-doorbell",
-        name: "Wyze Duo Cam Doorbell",
+        name: "Doorbell Camera",
         description: "Two cameras. Two views. Double the porch protection.",
-        image:
-          "https://images.unsplash.com/photo-1558002038-1055907df827?w=220&h=180&fit=crop",
+        assets: images.cameras.c4,
+        image: c4,
         badge: null,
         comparePrice: null,
         price: 69.98,
@@ -74,18 +135,17 @@ const steps: Step[] = [
       },
       {
         id: "cam-battery-pro",
-        name: "Wyze Battery Cam Pro",
+        name: "Battery Powered Camera",
         description:
           "Protect anywhere. See everything in 2.5K HDR. No power outlet or electrician needed.",
-        image:
-          "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=220&h=180&fit=crop",
+        assets: images.cameras.c5,
         badge: null,
         comparePrice: null,
         price: 89.98,
         learnMore: "#",
         variants: [
-          { id: "cam-bat-white", label: "White", color: "#FFFFFF", qty: 0 },
-          { id: "cam-bat-black", label: "Black", color: "#1F2937", qty: 0 },
+          { id: "cam-bat-white", label: "White", image: c5t1, qty: 0 },
+          { id: "cam-bat-black", label: "Black", image: c5t3, qty: 0 },
         ],
         activeVariant: "cam-bat-white",
       },
@@ -95,16 +155,15 @@ const steps: Step[] = [
     id: "plan",
     stepNumber: 2,
     title: "Choose your plan",
-    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    icon: <MdOutlineSecurity className="text-gray-600 text-2xl" />,
     nextLabel: "Next: Choose your sensors",
     products: [
       {
         id: "plan-cam-unlimited",
-        name: "Cam Unlimited",
+        name: "Premium Cloud Plan",
         description:
           "Unlimited cameras, 14-day cloud storage, person & motion detection, AI alerts.",
-        image:
-          "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=220&h=180&fit=crop",
+        image: pro,
         badge: "Most Popular",
         comparePrice: 12.99,
         price: 9.99,
@@ -117,10 +176,9 @@ const steps: Step[] = [
       },
       {
         id: "plan-basic",
-        name: "Basic Plan",
+        name: "Basic Cloud Plan",
         description: "7-day cloud storage, 1 camera, standard motion alerts.",
-        image:
-          "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=220&h=180&fit=crop",
+        image: basic,
         badge: null,
         comparePrice: null,
         price: 4.99,
@@ -137,15 +195,15 @@ const steps: Step[] = [
     id: "sensors",
     stepNumber: 3,
     title: "Choose your sensors",
-    icon: "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z",
+    icon: <MdSensors className="text-gray-600 text-2xl" />,
     nextLabel: "Next: Add extra protection",
     products: [
       {
         id: "sensor-motion",
-        name: "Wyze Sense Motion Sensor",
+        name: "Motion Sensor",
         description: "Pet-immune PIR, 110° detection, 3-year battery life.",
         image:
-          "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=220&h=180&fit=crop",
+          "https://media.screwfix.com/is/image/ae235/388FT_P?$fxSharpen$=&wid=257&hei=257&dpr=on",
         badge: null,
         comparePrice: null,
         price: 29.99,
@@ -156,11 +214,10 @@ const steps: Step[] = [
       },
       {
         id: "sensor-hub",
-        name: "Wyze Sense Hub (Required)",
+        name: "Sensor Hub (Required)",
         description:
           "Central hub for all Wyze sensors. Required for sensor functionality.",
-        image:
-          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=220&h=180&fit=crop",
+        image: "https://edingcnc.com/wp-content/uploads/2024/02/Sensorhub.png",
         badge: null,
         comparePrice: 29.92,
         price: 0,
@@ -176,16 +233,16 @@ const steps: Step[] = [
     id: "protection",
     stepNumber: 4,
     title: "Add extra protection",
-    icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10",
+    icon: <BsGrid3X3Gap className="text-gray-600 text-2xl" />,
     nextLabel: null,
     products: [
       {
         id: "acc-microsd",
-        name: "Wyze MicroSD Card (256GB)",
+        name: "Storage Card 256GB",
         description:
           "High-endurance card designed for 24/7 continuous recording.",
         image:
-          "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=220&h=180&fit=crop",
+          "https://m.media-amazon.com/images/I/61qyTylqFSL._AC_UF350,350_QL80_.jpg",
         badge: null,
         comparePrice: null,
         price: 20.98,
@@ -196,11 +253,11 @@ const steps: Step[] = [
       },
       {
         id: "acc-keypad",
-        name: "Wyze Smart Keypad",
+        name: "Security Keypad",
         description:
           "Touchscreen, user PINs, panic button, backlit for night use.",
         image:
-          "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=220&h=180&fit=crop",
+          "https://www.wyze.com/cdn/shop/products/wyze-sense-keypad-wyze-labs-inc-842216.png?v=1762439808&width=1946",
         badge: null,
         comparePrice: null,
         price: 39.99,

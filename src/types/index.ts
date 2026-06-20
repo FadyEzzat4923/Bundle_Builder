@@ -1,15 +1,25 @@
+import type { ReactNode } from "react";
+
 export interface Variant {
   id: string;
   label: string;
-  color: string;
+  color?: string;
+  image?: string;
   qty: number;
 }
+
+export interface ProductVariant {
+    src: string;
+    alt: string;
+    types: Record<string, string>;
+  }
 
 export interface Product {
   id: string;
   name: string;
   description: string;
-  image: string;
+  assets?: ProductVariant;
+  image?: string;
   badge: string | null;
   comparePrice: number | null;
   price: number;
@@ -26,7 +36,7 @@ export interface Step {
   id: StepId;
   stepNumber: number;
   title: string;
-  icon: string;
+  icon: ReactNode;
   nextLabel: string | null;
   products: Product[];
 }

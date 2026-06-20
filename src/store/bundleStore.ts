@@ -95,7 +95,7 @@ export function useReviewItems(): ReviewItem[] {
               productId: p.id,
               variantId: v.id,
               name: `${p.name} – ${v.label}`,
-              image: p.image,
+              image: v.image || p.image,
               price: p.price,
               comparePrice: p.comparePrice,
               priceSuffix: p.priceSuffix,

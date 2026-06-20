@@ -1,3 +1,5 @@
+import { FaMinus, FaPlus } from "react-icons/fa";
+
 interface Props {
   qty: number;
   onChange: (qty: number) => void;
@@ -13,33 +15,32 @@ export default function QuantityStepper({
   max = 99,
   small = false,
 }: Props) {
-  const btnBase = `flex items-center justify-center text-gray-500 hover:text-gray-800 
-                   hover:bg-gray-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed`;
-  const size = small ? "w-6 h-6 text-sm" : "w-8 h-8 text-base";
+  const btnBase = `flex items-center justify-center text-gray-500 hover:text-gray-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-xs`;
+  const size = small ? "w-6 h-6" : "w-6 h-6 text-[#E6EBF0]";
   const countSize = small ? "w-6 text-xs" : "w-8 text-sm";
 
   return (
-    <div className="flex items-center border border-gray-300 rounded overflow-hidden bg-white">
+    <div className="flex items-center rounded overflow-hidden">
       <button
-        className={`${btnBase} ${size}`}
+        className={`${btnBase} ${size} ${small ? "bg-white" : "border-2 border-[#E6EBF0]"} rounded-xs`}
         onClick={() => onChange(qty - 1)}
         disabled={qty <= min}
         aria-label="Decrease"
       >
-        −
+        <FaMinus />
       </button>
       <span
-        className={`${countSize} text-center font-semibold text-gray-800 border-x border-gray-300 py-0.5`}
+        className={`${countSize} text-center font-semibold text-gray-800 py-0.5`}
       >
         {qty}
       </span>
       <button
-        className={`${btnBase} ${size}`}
+        className={`${btnBase} ${size} ${small ? "bg-white" : " bg-gray-100"} text-sm rounded-xs`}
         onClick={() => onChange(qty + 1)}
         disabled={qty >= max}
         aria-label="Increase"
       >
-        +
+        <FaPlus />
       </button>
     </div>
   );

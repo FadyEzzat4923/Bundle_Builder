@@ -23,3 +23,12 @@ body {
   color: #111827;
   -webkit-font-smoothing: antialiased;
 }
+/* Scrollbar */
+*::-webkit-scrollbar {
+  width: 7px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-light);
+  border-radius: 2px;
+}

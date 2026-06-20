@@ -20,9 +20,11 @@ export default function AccordionStep({
   isLast,
 }: Props) {
   return (
-    <div className="border-b border-gray-200 last:border-0">
+    <div
+      className={`last:border-0 p-5 ${isOpen ? "border-indigo-600 rounded-3xl bg-[#EDF4FF]" : "border-b px-0"}`}
+    >
       {/* Step label */}
-      <p className="text-[10px] font-semibold tracking-widest text-gray-400 uppercase pt-4 px-1">
+      <p className="border-b border-gray-600 pb-2 text-[12px] font-semibold tracking-widest text-gray-400 uppercase pt-4 px-1">
         Step {step.stepNumber} of 4
       </p>
 
@@ -34,34 +36,24 @@ export default function AccordionStep({
       >
         <div className="flex items-center gap-3">
           {/* Icon */}
-          <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center shrink-0">
-            <svg
-              className="w-4 h-4 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              strokeWidth={1.8}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d={step.icon}
-              />
-            </svg>
+          <div className="w-8 h-8 flex items-center justify-center">
+            {step.icon}
           </div>
-          <span className="text-lg font-semibold text-gray-900">
+          <span className="lg:text-[22px] md:text-[20px] text-[18px] font-semibold text-gray-900">
             {step.title}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-3 shrink-0">
           {selectedCount > 0 && (
-            <span className="text-sm font-semibold text-indigo-600">
+            <span
+              className={`text-[14px] font-semibold text-indigo-600 ${isOpen ? "block" : "lg:hidden md:hidden sm:hidden block"}`}
+            >
               {selectedCount} selected
             </span>
           )}
           <svg
-            className={`w-4 h-4 text-indigo-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+            className={`w-5 h-5 text-indigo-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -78,7 +70,7 @@ export default function AccordionStep({
       {isOpen && (
         <div className="pb-5">
           {/* Cards grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-3 mb-4">
             {step.products.map((product) => (
               <ProductCard
                 key={product.id}
