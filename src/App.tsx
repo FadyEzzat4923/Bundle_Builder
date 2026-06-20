@@ -31,7 +31,7 @@ export default function App() {
       </header>
 
       {/* Two-column layout */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 items-start">
+      <main className="xl:px-10 lg:px-10 px-5 mx-auto sm:px-6 py-6 grid grid-cols-1 md:grid-cols-[1fr_380px] xl:grid-cols-1 gap-6 items-start">
         {/* Left: builder accordion */}
         <div className="flex flex-col gap-2">
           {steps.map((step, index) => (

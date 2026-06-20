@@ -21,7 +21,7 @@ export default function AccordionStep({
 }: Props) {
   return (
     <div
-      className={`last:border-0 p-5 ${isOpen ? "border-indigo-600 rounded-3xl bg-[#EDF4FF]" : "border-b px-0"}`}
+      className={`last:border-0 p-5 pb-2 pt-3 ${isOpen ? "border-indigo-600 rounded-3xl bg-[#EDF4FF]" : "border-b px-0"}`}
     >
       {/* Step label */}
       <p className="border-b border-gray-600 pb-2 text-[12px] font-semibold tracking-widest text-gray-400 uppercase pt-4 px-1">
@@ -39,7 +39,7 @@ export default function AccordionStep({
           <div className="w-8 h-8 flex items-center justify-center">
             {step.icon}
           </div>
-          <span className="lg:text-[22px] md:text-[20px] text-[18px] font-semibold text-gray-900">
+          <span className="xl:text-[28px] lg:text-[20px] md:text-[12px] text-[16px] font-semibold text-gray-900">
             {step.title}
           </span>
         </div>
@@ -47,7 +47,7 @@ export default function AccordionStep({
         <div className="flex items-center gap-3 shrink-0">
           {selectedCount > 0 && (
             <span
-              className={`text-[14px] font-semibold text-indigo-600 ${isOpen ? "block" : "lg:hidden md:hidden sm:hidden block"}`}
+              className={`xl:text-[14px] lg:text-[14px] md:text-[12px] text-[12px] font-semibold text-indigo-600 ${isOpen ? "block" : "xl:hidden lg:hidden md:hidden sm:hidden block"}`}
             >
               {selectedCount} selected
             </span>
@@ -70,7 +70,7 @@ export default function AccordionStep({
       {isOpen && (
         <div className="pb-5">
           {/* Cards grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-3 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 gap-3 mb-4 mt-2">
             {step.products.map((product) => (
               <ProductCard
                 key={product.id}
@@ -84,8 +84,7 @@ export default function AccordionStep({
           {!isLast && step.nextLabel && (
             <button
               onClick={onNext}
-              className="w-full py-3 border-2 border-indigo-600 text-indigo-600 font-semibold text-sm rounded-xl
-                         hover:bg-indigo-600 hover:text-white transition-all duration-200 flex items-center justify-center gap-2"
+              className="py-1 px-5 mx-auto border-2 border-indigo-600 text-indigo-600 font-semibold text-lg rounded-xl hover:bg-indigo-600 hover:text-white transition-all duration-200 flex items-center justify-center gap-2"
             >
               {step.nextLabel}
               <svg
