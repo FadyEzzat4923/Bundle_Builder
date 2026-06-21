@@ -45,7 +45,7 @@ export default function ProductCard({ product, stepId }: Props) {
         ${product.isPlan ? "cursor-pointer select-none" : ""}
         ${
           isSelected
-            ? "border-indigo-500 shadow-[0_0_0_1px_#4F46E5,0_4px_12px_rgba(79,70,229,0.12)]"
+            ? "border-primary-bg shadow-[0_0_0_1px_#4F46E5,0_4px_12px_rgba(79,70,229,0.12)]"
             : "border-gray-200 shadow-sm hover:border-gray-300 hover:shadow-md"
         }
       `}
@@ -53,7 +53,7 @@ export default function ProductCard({ product, stepId }: Props) {
       {/* Badge */}
       {product.badge && (
         <div
-          className={`absolute z-10 bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide ${product.isPlan ? "right-0 top-0" : "left-2.5 top-2.5"}`}
+          className={`absolute z-10 bg-primary-bg text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide ${product.isPlan ? "right-0 top-0" : "left-2.5 top-2.5"}`}
         >
           {product.badge}
         </div>
@@ -75,13 +75,15 @@ export default function ProductCard({ product, stepId }: Props) {
         className={`p-3 flex flex-col gap-2 flex-1 ${product.isPlan ? "mt-2 text-[#4E2FD2]" : "text-gray-900"}`}
       >
         <h3 className="text-lg font-semibold leading-snug flex gap-1 items-center">
-          {product.isPlan && <img src={displayImage} alt={product.name} className="w-10 h-10" />}
+          {product.isPlan && (
+            <img src={displayImage} alt={product.name} className="w-10 h-10" />
+          )}
           {product.isPlan && <span className="text-black">Cam</span>}{" "}
           {product.name}
         </h3>
         <p className="text-sm text-gray-500 leading-relaxed flex-1">
           {product.description}{" "}
-          <span className="text-sm text-indigo-600 hover:underline font-medium cursor-pointer">
+          <span className="text-sm text-primary hover:underline font-medium cursor-pointer">
             Learn More
           </span>
         </p>
@@ -97,8 +99,8 @@ export default function ProductCard({ product, stepId }: Props) {
                   flex items-center gap-1 px-2 py-1 rounded-lg border text-[11px] font-medium transition-all
                   ${
                     product.activeVariant === v.id
-                      ? "border-emerald-200 text-emerald-700 bg-emerald-50"
-                      : "border-gray-300 text-gray-600 hover:border-gray-400"
+                      ? "border-emerald-200 text-green bg-emerald-50"
+                      : "border-gray-300 text-secondary hover:border-gray-400"
                   }
                 `}
                 title={v.label}
@@ -117,7 +119,7 @@ export default function ProductCard({ product, stepId }: Props) {
                 )}
                 {v.label}
                 {v.qty > 0 && (
-                  <span className="ml-0.5 bg-indigo-600 text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                  <span className="ml-0.5 bg-primary-bg text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
                     {v.qty}
                   </span>
                 )}
@@ -140,10 +142,10 @@ export default function ProductCard({ product, stepId }: Props) {
             className={`flex lg:flex-col gap-1 ${product.isPlan ? "ml-auto lg:flex-row" : ""}`}
           >
             {product.comparePrice && (
-              <span className="text-[16px] text-[#D8392B] line-through">
+              <span className="text-base text-[#D8392B] line-through">
                 ${product.comparePrice.toFixed(2)}
                 {product.isPlan && (
-                  <span className="text-[16px] font-normal text-[#575757]">
+                  <span className="text-base font-normal text-[#575757]">
                     {product.priceSuffix}
                   </span>
                 )}
@@ -152,7 +154,7 @@ export default function ProductCard({ product, stepId }: Props) {
             <span className="text-base font-bold text-[#575757]">
               ${product.price.toFixed(2)}
               {product.isPlan && (
-                <span className="text-[16px] font-normal text-[#575757]">
+                <span className="text-base font-normal text-[#575757]">
                   {product.priceSuffix}
                 </span>
               )}

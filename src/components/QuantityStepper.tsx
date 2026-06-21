@@ -30,7 +30,7 @@ export default function QuantityStepper({
         <FaMinus />
       </button>
       <span
-        className={`${countSize} text-center font-semibold text-gray-800 py-0.5`}
+        className={`${countSize} text-center font-semibold text-secondary py-0.5 text-base`}
       >
         {qty}
       </span>

@@ -21,10 +21,10 @@ export default function AccordionStep({
 }: Props) {
   return (
     <div
-      className={`last:border-0 p-5 pb-2 pt-3 ${isOpen ? "border-indigo-600 rounded-3xl bg-[#EDF4FF]" : "border-b px-0"}`}
+      className={`last:border-0 p-5 pb-2 pt-3 ${isOpen ? "border-primary rounded-3xl bg-[#EDF4FF]" : "border-b px-0"}`}
     >
       {/* Step label */}
-      <p className="border-b border-gray-600 pb-2 text-[12px] font-semibold tracking-widest text-gray-400 uppercase pt-4 px-1">
+      <p className="border-b border-gray-600 pb-2 text-xs font-semibold tracking-widest text-gray-400 uppercase pt-4 px-1">
         Step {step.stepNumber} of 4
       </p>
 
@@ -36,24 +36,24 @@ export default function AccordionStep({
       >
         <div className="flex items-center gap-3">
           {/* Icon */}
-          <div className="w-8 h-8 flex items-center justify-center">
+          <div className="w-7.5 h-7.5 flex items-center justify-center">
             {step.icon}
           </div>
-          <span className="xl:text-[28px] lg:text-[20px] md:text-[12px] text-[16px] font-semibold text-gray-900">
+          <span className="xl:text-[28px] lg:text-xl md:text-xs text-base font-semibold text-primary-dark">
             {step.title}
           </span>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           {selectedCount > 0 && (
             <span
-              className={`xl:text-[14px] lg:text-[14px] md:text-[12px] text-[12px] font-semibold text-indigo-600 ${isOpen ? "block" : "xl:hidden lg:hidden md:hidden sm:hidden block"}`}
+              className={`xl:text-sm lg:text-sm text-xs font-semibold text-primary ${isOpen ? "block" : "xl:hidden lg:hidden md:hidden sm:hidden block"}`}
             >
               {selectedCount} selected
             </span>
           )}
           <svg
-            className={`w-5 h-5 text-indigo-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+            className={`w-5 h-5 text-primary transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -84,7 +84,7 @@ export default function AccordionStep({
           {!isLast && step.nextLabel && (
             <button
               onClick={onNext}
-              className="py-1 px-5 mx-auto border-2 border-indigo-600 text-indigo-600 font-semibold text-lg rounded-xl hover:bg-indigo-600 hover:text-white transition-all duration-200 flex items-center justify-center gap-2"
+              className="py-1 px-5 mx-auto border-2 border-primary text-primary font-semibold text-lg rounded-xl hover:bg-primary-bg hover:text-white transition-all duration-200 flex items-center justify-center gap-2"
             >
               {step.nextLabel}
               <svg

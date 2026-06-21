@@ -50,7 +50,7 @@ export default function ReviewPanel() {
           <h2 className="text-2xl font-bold text-gray-900">
             Your security system
           </h2>
-          <p className="text-[16px] text-[#1F1F1FBF] mt-1">
+          <p className="text-base text-[#1F1F1FBF] mt-1">
             Review your personalized protection system designed to keep what
             matters most safe.
           </p>
@@ -128,11 +128,11 @@ export default function ReviewPanel() {
                               </p>
                             )}
                             {item.isFree ? (
-                              <p className="text-sm font-bold text-emerald-600">
+                              <p className="text-sm font-bold text-primary">
                                 FREE
                               </p>
                             ) : (
-                              <p className="text-sm font-bold text-indigo-600">
+                              <p className="text-sm font-bold text-primary">
                                 ${(item.price * item.qty).toFixed(2)}
                                 {item.isPlan && (
                                   <span className="text-[10px] font-normal text-gray-400">
@@ -162,7 +162,7 @@ export default function ReviewPanel() {
               </div>
               <div className="text-right xl:flex gap-1 items-center">
                 <p className="text-[10px] text-gray-400 line-through">$5.99</p>
-                <p className="text-sm font-bold text-emerald-600">FREE</p>
+                <p className="text-sm font-bold text-primary">FREE</p>
               </div>
             </div>
           </div>
@@ -191,7 +191,7 @@ export default function ReviewPanel() {
 
           {/* Financing pill + total row */}
           <div className="w-full flex xl:flex-row xl:items-center flex-col items-end justify-between">
-            <span className="text-xs bg-indigo-600 text-white font-semibold px-3 py-1 rounded-full">
+            <span className="text-xs bg-primary-bg text-white font-semibold px-3 py-1 rounded-full">
               as low as ${monthlyMin}/mo
             </span>
             <div className="text-right flex gap-3 items-center">
@@ -200,7 +200,7 @@ export default function ReviewPanel() {
                   ${compareTotal.toFixed(2)}
                 </p>
               )}
-              <p className="xl:text-[28px] text-[28px] font-bold text-[#4E2FD2]">
+              <p className="xl:text-[28px] text-[28px] font-bold text-primary">
                 ${subtotal.toFixed(2)}
               </p>
             </div>
@@ -209,7 +209,7 @@ export default function ReviewPanel() {
 
         {/* Savings */}
         {savings > 0 && (
-          <p className="text-xs font-semibold text-emerald-600 text-center -mt-1">
+          <p className="text-xs font-semibold text-green text-center -mt-1">
             Congrats! You're saving ${savings.toFixed(2)} on your security
             bundle!
           </p>
@@ -218,8 +218,7 @@ export default function ReviewPanel() {
         {/* Checkout */}
         <button
           onClick={handleCheckout}
-          className="w-full py-3.5 bg-indigo-700 hover:bg-indigo-800 text-white font-bold text-base
-                     rounded-xl transition-colors duration-200"
+          className="w-full py-3.5 bg-primary-bg hover:bg-indigo-800 text-white font-bold text-base rounded-xl transition-colors duration-200"
         >
           {checked ? "✓ Order placed!" : "Checkout"}
         </button>
@@ -227,7 +226,7 @@ export default function ReviewPanel() {
         {/* Save */}
         <button
           onClick={handleSave}
-          className="text-center text-xs text-gray-500 hover:text-gray-800 underline underline-offset-2 transition-colors"
+          className="text-center text-xs text-secondary hover:text-gray-800 underline underline-offset-2 transition-colors"
         >
           {saved ? "✓ Saved!" : "Save my system for later"}
         </button>

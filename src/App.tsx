@@ -25,7 +25,7 @@ export default function App() {
     <div className="min-h-screen bg-gray-50">
       {/* Top bar */}
       <header className="text-center my-3">
-        <h1 className="font-bold text-gray-900 lg:hidden md:hidden sm:hidden block text-[31.88px]">
+        <h1 className="font-bold text-gray-900 lg:hidden md:hidden sm:hidden block text-3xl">
           Let's get started!
         </h1>
       </header>
