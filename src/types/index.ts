@@ -8,18 +8,12 @@ export interface Variant {
   qty: number;
 }
 
-export interface ProductVariant {
-  src: string;
-  alt: string;
-  types: Record<string, string>;
-}
-
 export interface Product {
   id: string;
+  isPlan?: Boolean;
   name: string;
   description: string;
-  assets?: ProductVariant;
-  image?: string;
+  image: string;
   badge: string | null;
   comparePrice: number | null;
   price: number;
@@ -46,11 +40,11 @@ export type StepId = "cameras" | "plan" | "sensors" | "protection";
 export interface ReviewItem {
   key: string;
   stepId: StepId;
+  isPlan?: Boolean;
   productId: string;
   variantId: string | null;
   name: string;
-  assets?: ProductVariant;
-  image?: string;
+  image: string;
   price: number;
   comparePrice: number | null;
   priceSuffix?: string;

@@ -16,53 +16,8 @@ import c4 from "../assets/camera4.png";
 import c5 from "../assets/camera5.png";
 import c5t1 from "../assets/camera5-white.png";
 import c5t3 from "../assets/camera5-black.png";
-import pro from "../assets/pro-plan.png";
-import basic from "../assets/basic-plan.png";
-
-const images = {
-  cameras: {
-    c1: {
-      src: c1,
-      alt: "Wyze Cam v4",
-      types: {
-        white: c1t1,
-        grey: c1t2,
-        black: c1t3,
-      },
-    },
-    c2: {
-      src: c2,
-      alt: "Wyze Cam Pan v3",
-      types: {
-        white: c2t1,
-        black: c2t3,
-      },
-    },
-    c3: {
-      src: c3,
-      alt: "Wyze Cam Floodlight v2",
-      types: {
-        white: c3t1,
-        black: c3t3,
-      },
-    },
-    c4: {
-      src: c4,
-      alt: "Wyze Duo Cam Doorbell",
-      types: {
-        white: c4,
-      },
-    },
-    c5: {
-      src: c5,
-      alt: "Wyze Battery Cam Pro",
-      types: {
-        white: c5t1,
-        black: c5t3,
-      },
-    },
-  },
-};
+import proIcon from "../assets/pro-icon.png";
+import basicIcon from "../assets/basic-icon.png";
 
 const steps: Step[] = [
   {
@@ -76,7 +31,7 @@ const steps: Step[] = [
         id: "cam-v4",
         name: "Standard Camera",
         description: "The clearest Wyze Cam ever made.",
-        assets: images.cameras.c1,
+        image: c1,
         badge: "Save 22%",
         comparePrice: 35.98,
         price: 27.98,
@@ -92,7 +47,7 @@ const steps: Step[] = [
         id: "cam-pan-v3",
         name: "Pan & Tilt Camera",
         description: "360° pan and 180° tilt security camera.",
-        assets: images.cameras.c2,
+        image: c2,
         badge: "Save 12%",
         comparePrice: 39.98,
         price: 34.98,
@@ -108,7 +63,7 @@ const steps: Step[] = [
         name: "Floodlight Camera",
         description:
           "2K floodlight camera with a 160° wide-angle view for your garage.",
-        assets: images.cameras.c3,
+        image: c3,
         badge: "Save 22%",
         comparePrice: 89.98,
         price: 69.98,
@@ -123,7 +78,6 @@ const steps: Step[] = [
         id: "cam-doorbell",
         name: "Doorbell Camera",
         description: "Two cameras. Two views. Double the porch protection.",
-        assets: images.cameras.c4,
         image: c4,
         badge: null,
         comparePrice: null,
@@ -138,7 +92,7 @@ const steps: Step[] = [
         name: "Battery Powered Camera",
         description:
           "Protect anywhere. See everything in 2.5K HDR. No power outlet or electrician needed.",
-        assets: images.cameras.c5,
+        image: c5,
         badge: null,
         comparePrice: null,
         price: 89.98,
@@ -160,10 +114,11 @@ const steps: Step[] = [
     products: [
       {
         id: "plan-cam-unlimited",
-        name: "Premium Cloud Plan",
+        isPlan: true,
+        name: "Unlimited",
         description:
           "Unlimited cameras, 14-day cloud storage, person & motion detection, AI alerts.",
-        image: pro,
+        image: proIcon,
         badge: "Most Popular",
         comparePrice: 12.99,
         price: 9.99,
@@ -176,9 +131,10 @@ const steps: Step[] = [
       },
       {
         id: "plan-basic",
-        name: "Basic Cloud Plan",
+        isPlan: true,
+        name: "Basic",
         description: "7-day cloud storage, 1 camera, standard motion alerts.",
-        image: basic,
+        image: basicIcon,
         badge: null,
         comparePrice: null,
         price: 4.99,

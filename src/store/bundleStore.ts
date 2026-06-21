@@ -8,6 +8,7 @@ interface BundleState {
   activeStep: number;
 
   // Actions
+  selectPlan: (stepId: StepId, productId: string) => void;
   setActiveStep: (index: number) => void;
   setQty: (
     stepId: StepId,
@@ -38,6 +39,20 @@ export const useBundleStore = create<BundleState>()(
       setActiveStep: (index) =>
         set((state) => ({
           activeStep: state.activeStep === index ? -1 : index,
+        })),
+
+      selectPlan: (stepId, productId) =>
+        set((state) => ({
+          steps: state.steps.map((step) => {
+            if (step.id !== stepId) return step;
+            return {
+              ...step,
+              products: step.products.map((p) => {
+                if (!p.isPlan) return p;
+                return { ...p, qty: p.id === productId ? 1 : 0 };
+              }),
+            };
+          }),
         })),
 
       setQty: (stepId, productId, variantId, qty) =>
@@ -153,7 +168,7 @@ export function useReviewItems(): ReviewItem[] {
               productId: p.id,
               variantId: v.id,
               name: `${p.name} – ${v.label}`,
-              assets: p.assets,
+              isPlan: p.isPlan,
               image: v.image || p.image,
               price: p.price,
               comparePrice: p.comparePrice,
@@ -174,7 +189,7 @@ export function useReviewItems(): ReviewItem[] {
             productId: p.id,
             variantId: null,
             name: p.name,
-            assets: p.assets,
+            isPlan: p.isPlan,
             image: p.image,
             price: p.price,
             comparePrice: p.comparePrice,

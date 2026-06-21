@@ -10,6 +10,7 @@ interface Props {
 export default function ProductCard({ product, stepId }: Props) {
   const setQty = useBundleStore((s) => s.setQty);
   const setActiveVariant = useBundleStore((s) => s.setActiveVariant);
+  const selectPlan = useBundleStore((s) => s.selectPlan);
 
   const activeVariant =
     product.variants?.find((v) => v.id === product.activeVariant) ?? null;
@@ -23,13 +24,25 @@ export default function ProductCard({ product, stepId }: Props) {
     setQty(stepId, product.id, product.activeVariant, qty);
   };
 
+  const handlePlanClick = () => {
+    // Toggle off if already selected, otherwise select exclusively
+    if (isSelected) {
+      setQty(stepId, product.id, null, 0);
+    } else {
+      selectPlan(stepId, product.id);
+    }
+  };
+
   const displayImage =
     activeVariant?.image || firstVariant?.image || product.image;
 
   return (
     <div
+      onClick={product.isPlan ? handlePlanClick : undefined} // ← card click
       className={`
-        relative flex lg:flex-row xl:flex-col flex-col bg-white rounded-xl border-2 transition-all duration-200 overflow-hidden
+        relative flex lg:flex-row xl:flex-col flex-col bg-white rounded-xl border-2
+        transition-all duration-200 overflow-hidden
+        ${product.isPlan ? "cursor-pointer select-none" : ""}
         ${
           isSelected
             ? "border-indigo-500 shadow-[0_0_0_1px_#4F46E5,0_4px_12px_rgba(79,70,229,0.12)]"
@@ -39,23 +52,31 @@ export default function ProductCard({ product, stepId }: Props) {
     >
       {/* Badge */}
       {product.badge && (
-        <div className="absolute top-2.5 left-2.5 z-10 bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+        <div
+          className={`absolute z-10 bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide ${product.isPlan ? "right-0 top-0" : "left-2.5 top-2.5"}`}
+        >
           {product.badge}
         </div>
       )}
 
-      {/* Image */}
-      <div className="w-full lg:w-1/3 xl:w-full aspect-4/3 overflow-hidden flex items-center justify-center">
-        <img
-          src={displayImage}
-          alt={product.name}
-          className="w-full h-full object-contain"
-        />
-      </div>
+      {/* Image — hidden for plans */}
+      {!product.isPlan && (
+        <div className="w-full lg:w-1/3 xl:w-full aspect-4/3 overflow-hidden flex items-center justify-center">
+          <img
+            src={displayImage}
+            alt={product.name}
+            className="w-full h-full object-contain"
+          />
+        </div>
+      )}
 
       {/* Body */}
-      <div className="p-3 flex flex-col gap-2 flex-1">
-        <h3 className="text-lg font-semibold text-gray-900 leading-snug">
+      <div
+        className={`p-3 flex flex-col gap-2 flex-1 ${product.isPlan ? "mt-2 text-[#4E2FD2]" : "text-gray-900"}`}
+      >
+        <h3 className="text-lg font-semibold leading-snug flex gap-1 items-center">
+          {product.isPlan && <img src={displayImage} alt={product.name} className="w-10 h-10" />}
+          {product.isPlan && <span className="text-black">Cam</span>}{" "}
           {product.name}
         </h3>
         <p className="text-sm text-gray-500 leading-relaxed flex-1">
@@ -65,8 +86,8 @@ export default function ProductCard({ product, stepId }: Props) {
           </span>
         </p>
 
-        {/* Variant chips */}
-        {product.variants && product.variants.length > 1 && (
+        {/* Variant chips — non-plans only */}
+        {!product.isPlan && product.variants && product.variants.length > 1 && (
           <div className="flex gap-1.5 flex-wrap">
             {product.variants.map((v) => (
               <button
@@ -105,23 +126,32 @@ export default function ProductCard({ product, stepId }: Props) {
           </div>
         )}
 
-        {/* Footer: price + stepper */}
+        {/* Footer: price + stepper (stepper hidden for plans) */}
         <div className="flex items-center justify-between mt-1 gap-2">
-          <QuantityStepper
-            qty={currentQty}
-            onChange={handleQty}
-            max={product.maxQty ?? 99}
-          />
+          {!product.isPlan && (
+            <QuantityStepper
+              qty={currentQty}
+              onChange={handleQty}
+              max={product.maxQty ?? 99}
+            />
+          )}
 
-          <div className="flex lg:flex-col gap-1">
+          <div
+            className={`flex lg:flex-col gap-1 ${product.isPlan ? "ml-auto lg:flex-row" : ""}`}
+          >
             {product.comparePrice && (
               <span className="text-[16px] text-[#D8392B] line-through">
                 ${product.comparePrice.toFixed(2)}
+                {product.isPlan && (
+                  <span className="text-[16px] font-normal text-[#575757]">
+                    {product.priceSuffix}
+                  </span>
+                )}
               </span>
             )}
             <span className="text-base font-bold text-[#575757]">
               ${product.price.toFixed(2)}
-              {product.priceSuffix && (
+              {product.isPlan && (
                 <span className="text-[16px] font-normal text-[#575757]">
                   {product.priceSuffix}
                 </span>

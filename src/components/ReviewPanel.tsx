@@ -87,30 +87,44 @@ export default function ReviewPanel() {
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-10 h-10 rounded-lg object-cover bg-gray-100 shrink-0 border border-gray-200"
+                        className={`rounded-lg object-cover shrink-0 w-10 h-10`}
                       />
                       <div className="flex-1 min-w-0 flex justify-between items-center">
-                        <p className="text-xs font-medium text-gray-800 leading-snug truncate">
-                          {item.name}
+                        <p className="text-sm font-medium text-[#0B0D10] leading-snug truncate">
+                          {item.isPlan && (
+                            <span className="text-black">Cam</span>
+                          )}{" "}
+                          {item.isPlan ? (
+                            <span className="text-[#4E2FD2]">{item.name}</span>
+                          ) : (
+                            item.name
+                          )}
                         </p>
                         <div className="flex items-center mt-1.5 gap-2">
-                          <QuantityStepper
-                            qty={item.qty}
-                            onChange={(qty) =>
-                              setQty(
-                                item.stepId as StepId,
-                                item.productId,
-                                item.variantId,
-                                qty,
-                              )
-                            }
-                            max={item.maxQty ?? 99}
-                            small
-                          />
+                          {!item.isPlan && (
+                            <QuantityStepper
+                              qty={item.qty}
+                              onChange={(qty) =>
+                                setQty(
+                                  item.stepId as StepId,
+                                  item.productId,
+                                  item.variantId,
+                                  qty,
+                                )
+                              }
+                              max={item.maxQty ?? 99}
+                              small
+                            />
+                          )}
                           <div className="text-right shrink-0 xl:flex gap-1 items-center">
                             {item.comparePrice && (
                               <p className="text-[10px] text-gray-400 line-through">
                                 ${(item.comparePrice * item.qty).toFixed(2)}
+                                {item.isPlan && (
+                                  <span className="text-[10px] font-normal text-gray-400">
+                                    {item.priceSuffix}
+                                  </span>
+                                )}
                               </p>
                             )}
                             {item.isFree ? (
@@ -120,7 +134,7 @@ export default function ReviewPanel() {
                             ) : (
                               <p className="text-sm font-bold text-indigo-600">
                                 ${(item.price * item.qty).toFixed(2)}
-                                {item.priceSuffix && (
+                                {item.isPlan && (
                                   <span className="text-[10px] font-normal text-gray-400">
                                     {item.priceSuffix}
                                   </span>
